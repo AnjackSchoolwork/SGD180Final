@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<!-- Load framework -->
+    <script type="text/javascript" src="src/phaser.js"></script>
+	<!-- Load game states -->
+	<script type="text/javascript" src="src/startup.js"></script>
+	<script type="text/javascript" src="src/menu.js"></script>
+	<script type="text/javascript" src="src/game_play.js"></script>
+	<script type="text/javascript" src="src/game_over.js"></script>
+	<!-- Load init script -->
+	<script type="text/javascript" src="src/init.js"></script>
+	<!-- Load stylesheet -->
+	<link rel="stylesheet" type="text/css" href="style.css" />
+    <title></title>
+</head>
+<body>
+	<div id="title">
+		<!-- Single-line title text (subscript supported) -->
+	</div>
+	<div id="game_screen">
+		<!-- This is where the visible canvas element should go -->
+	</div>
+	<div id="instructions">
+		<!-- Well-formatted, simple instructions go here -->
+	</div>
+	<script>
+		// Load game after previous elements have completed
+		setup()
+	</script>
+</body>
+</html>
