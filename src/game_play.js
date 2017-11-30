@@ -4,20 +4,24 @@ var game_play = function () {
 }
 
 game_play.prototype = {
+	init: function (controls_object) {
+		// Get the controls from the previous state
+		this.controls = controls_object
+	},
 
 	preload: function () {
 		// Load test map
 		this.game.load.tilemap('map_test', 'maps/Map_Test.json', null, Phaser.Tilemap.TILED_JSON)
 		this.game.load.image('tileset_test', 'img/Tileset_Test.png')
 
-		cursors = this.game.input.keyboard.createCursorKeys()
+		//cursors = this.game.input.keyboard.createCursorKeys()
 	},
 
 	create: function () {
 		// Physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
 
-		// Load the map and tileset, with layer
+		// Load the test map and tileset, with layer
 		map = this.game.add.tilemap('map_test')
 		map.addTilesetImage('Tileset_Test', 'tileset_test')
 		map.setCollisionBetween(0, 15)
@@ -30,22 +34,28 @@ game_play.prototype = {
 		this.game.physics.arcade.enable(player)
 		player.body.bounce.y = 0
 		player.body.gravity.y = 600
-		
+
+		// Configure the camera
+		this.game.camera.follow(player)
 	},
 
 	update: function () {
 
 		// Collisions
-		this.game.physics.arcade.collide(player, layer)
+		hit_platform = this.game.physics.arcade.collide(player, layer)
 
 		// Movement & controls
 		player.body.velocity.x = 0
 		// Keyboard controls
-		if (cursors.left.isDown) {
+		if (this.controls.left_key.isDown) {
 			player.body.velocity.x = -150
 		}
-		else if (cursors.right.isDown) {
+		else if (this.controls.right_key.isDown) {
 			player.body.velocity.x = +150
+		}
+
+		if (this.controls.jump_key.isDown && player.body.blocked.down && hit_platform) {
+			player.body.velocity.y = -400
 		}
 	}
 
