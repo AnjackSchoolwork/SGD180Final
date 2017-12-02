@@ -1,6 +1,8 @@
 
 var game_play = function () {
-
+	var map = {}
+	var player = {}
+	var layer = {}
 }
 
 game_play.prototype = {
@@ -28,12 +30,20 @@ game_play.prototype = {
 		layer = map.createLayer('Tile Layer 1')
 		layer.resizeWorld()
 
+		// Create group to hold players
+		players = this.add.group()
+
+		// Generate player entities from map data
+		map.createFromObjects('Object Layer 1', 'Player1', 'placeholder_player', 0, true, false, players)
+
 		// Create the player object
-		player = this.game.add.sprite(64, 380, 'placeholder_player')
-		player.anchor.set(0.5, 1)
-		this.game.physics.arcade.enable(player)
-		player.body.bounce.y = 0
-		player.body.gravity.y = 600
+		player = players.children[0]
+		if (typeof player != undefined) {
+			player.anchor.set(0.5, 1)
+			this.game.physics.arcade.enable(player)
+			player.body.bounce.y = 0
+			player.body.gravity.y = 600
+		}
 
 		// Configure the camera
 		this.game.camera.follow(player)
@@ -47,16 +57,20 @@ game_play.prototype = {
 		// Movement & controls
 		player.body.velocity.x = 0
 		// Keyboard controls
-		if (this.controls.left_key.isDown) {
-			player.body.velocity.x = -150
-		}
-		else if (this.controls.right_key.isDown) {
-			player.body.velocity.x = +150
-		}
-
-		if (this.controls.jump_key.isDown && player.body.blocked.down && hit_platform) {
-			player.body.velocity.y = -400
-		}
+		checkInput(this.controls, player)
 	}
 
+}
+
+function checkInput(controls, player) {
+	if (controls.left_key.isDown) {
+		player.body.velocity.x = -150
+	}
+	else if (controls.right_key.isDown) {
+		player.body.velocity.x = +150
+	}
+
+	if (controls.jump_key.isDown && player.body.blocked.down && hit_platform) {
+		player.body.velocity.y = -400
+	}
 }
