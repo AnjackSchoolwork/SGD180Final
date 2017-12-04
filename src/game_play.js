@@ -29,7 +29,7 @@ game_play.prototype = {
 
 		// Create group to hold players
 		players = this.add.group() // GAH global :(
-
+		
 		// Generate player entities from map data
 		map.createFromObjects('Object Layer 1', 'Player1', 'placeholder_player', 0, true, false, players)
 
