@@ -27,6 +27,20 @@ game_play.prototype = {
 		layer = map.createLayer('Tile Layer 1') // GAH global :(
 		layer.resizeWorld()
 
+		// Load entity objects (enemies, npcs)
+		enemies = this.add.group()
+
+		var object_list = map.objects['Object Layer 1']
+		for (var index in object_list) {
+			if (object_list[index].type == "Slime") {
+				var temp_entity = new Entity(this, enemies, object_list[index].x, object_list[index].y, "test_slime")
+			}
+		}
+
+		// Load interactable objects
+
+		// Load pickup-able objects
+
 		// Create group to hold players
 		players = this.add.group() // GAH global :(
 		
@@ -50,6 +64,7 @@ game_play.prototype = {
 
 		// Collisions
 		hit_platform = this.game.physics.arcade.collide(player, layer)
+		hit_enemies_platform = this.game.physics.arcade.collide(enemies, layer)
 
 		// Movement & controls
 		player.body.velocity.x = 0

@@ -27,6 +27,54 @@
                  "width":0,
                  "x":63.9848,
                  "y":94.4848
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"TestSlime",
+                 "point":true,
+                 "rotation":0,
+                 "type":"Slime",
+                 "visible":true,
+                 "width":0,
+                 "x":370.083333333333,
+                 "y":319.166666666667
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"TestSlime",
+                 "point":true,
+                 "rotation":0,
+                 "type":"Slime",
+                 "visible":true,
+                 "width":0,
+                 "x":406.083333333333,
+                 "y":574.166666666667
+                }, 
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"TestSlime",
+                 "point":true,
+                 "rotation":0,
+                 "type":"Slime",
+                 "visible":true,
+                 "width":0,
+                 "x":461.083333333333,
+                 "y":797.166666666667
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"TestSlime",
+                 "point":true,
+                 "rotation":0,
+                 "type":"Slime",
+                 "visible":true,
+                 "width":0,
+                 "x":716.083333333333,
+                 "y":350.166666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -34,7 +82,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":5,
+ "nextobjectid":9,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2017.11.22",
