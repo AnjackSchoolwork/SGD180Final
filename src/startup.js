@@ -14,7 +14,7 @@ startup.prototype = {
 		// Load all images and spritesheets or atlases (except map data)
 		this.game.load.image('logo_title', 'img/Logo_Title.png', 512, 128)
 		this.game.load.spritesheet('button_play', 'img/Button_Play.png', 128, 64)
-		this.game.load.image('placeholder_player', 'img/Placeholder_Player.png', 32, 64)
+		this.game.load.image('placeholder_player', 'img/Placeholder_Player.png', 32, 52)
 
 		// Load all sound effects
 
