@@ -33,47 +33,40 @@ game_play.prototype = {
 
 		var object_list = map.objects['Object Layer 1']
 		for (var index in object_list) {
+			// First load entities
 			if (object_list[index].type == "Slime") {
 				var temp_entity = new Entity(this, enemies, object_list[index].x, object_list[index].y, "test_slime")
+
+			}
+			// Next load player
+			else if (object_list[index].type == "Player") {
+				player = new Player(this, object_list[index].x, object_list[index].y, "placeholder_player")
+
+				// Load interactable objects
+
+				// Load pickup-able objects
+
 			}
 		}
 
-		// Load interactable objects
-
-		// Load pickup-able objects
-
-		// Create group to hold players
-		players = this.add.group() // GAH global :(
-		
-		// Generate player entities from map data
-		map.createFromObjects('Object Layer 1', 'Player1', 'placeholder_player', 0, true, false, players)
-
-		// Create the player object
-		player = players.children[0] // GAH global :(
-		if (typeof player != undefined) {
-			player.anchor.set(0.5, 1)
-			this.game.physics.arcade.enable(player)
-			player.body.bounce.y = 0
-			player.body.gravity.y = 1600
-		}
 
 		// Configure the camera
-		this.game.camera.follow(player)
+		this.game.camera.follow(player.sprite)
 	},
 
 	update: function () {
 
 		// Collisions
-		hit_platform = this.game.physics.arcade.collide(player, layer)
+		hit_platform = this.game.physics.arcade.collide(player.sprite, layer)
 		hit_enemies_platform = this.game.physics.arcade.collide(enemies, layer)
 
 		// Enemy pseudo-ai
 		enemies.forEachExists(function (enemy) {
-			enemy.entity.think(this, map, player)
+			enemy.entity.think(this, map, player.sprite)
 		})
 
 		// Movement & controls
-		player.body.velocity.x = 0
+		player.setVelocityX(0)
 		// Player control input
 		checkInput(this.controls, player)
 
@@ -87,14 +80,14 @@ function checkInput(controls, player) {
 
 	// Keyboard
 	if (controls.left_key.isDown) {
-		player.body.velocity.x = -250
+		player.goLeft()
 	}
 	else if (controls.right_key.isDown) {
-		player.body.velocity.x = +250
+		player.goRight()
 	}
 
-	if (controls.jump_key.isDown && player.body.blocked.down && hit_platform) {
-		player.body.velocity.y = -700
+	if (controls.jump_key.isDown && player.sprite.body.blocked.down && hit_platform) {
+		player.jump()
 	}
 
 	// Gamepad

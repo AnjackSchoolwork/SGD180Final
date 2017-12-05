@@ -86,3 +86,46 @@ class Entity {
 	}
 }
 
+/*
+*/
+class Player {
+	constructor(game, x, y, image) {
+
+		// Build sprite
+		this.sprite = game.add.sprite(x, y, image)
+		this.sprite.entity = this
+
+		this.sprite.anchor.set(0.5, 1)
+		game.physics.arcade.enable(this.sprite)
+
+		this.sprite.body.gravity.y = 1600
+
+		// Initialize variables
+		this.health = 100
+		this.base_speed = 250
+		this.jump_impulse = 700
+
+	}
+
+	// Move the player
+	setVelocityX(new_velocity) {
+		this.sprite.body.velocity.x = new_velocity
+	}
+
+	setVelocityY(new_velocity) {
+		this.sprite.body.velocity.y = new_velocity
+	}
+
+	goLeft() {
+		this.setVelocityX(-1 * this.base_speed)
+	}
+
+	goRight() {
+		this.setVelocityX(this.base_speed)
+	}
+
+	jump() {
+		this.setVelocityY(-1 * this.jump_impulse)
+	}
+
+}
