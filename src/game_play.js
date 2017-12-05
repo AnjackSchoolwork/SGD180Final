@@ -29,6 +29,7 @@ game_play.prototype = {
 
 		// Load entity objects (enemies, npcs)
 		enemies = this.add.group()
+		enemies.enableBody = true
 
 		var object_list = map.objects['Object Layer 1']
 		for (var index in object_list) {
@@ -65,6 +66,11 @@ game_play.prototype = {
 		// Collisions
 		hit_platform = this.game.physics.arcade.collide(player, layer)
 		hit_enemies_platform = this.game.physics.arcade.collide(enemies, layer)
+
+		// Enemy pseudo-ai
+		enemies.forEachExists(function (enemy) {
+			enemy.entity.think(this, map, player)
+		})
 
 		// Movement & controls
 		player.body.velocity.x = 0
