@@ -23,16 +23,41 @@ class Entity {
 		game.physics.arcade.enable(this.sprite)
 
 		// Initialize properties
+		this.health = 100
+		this.base_speed = 75
+
+		// Start in motion, with gravity
 		this.is_moving = true
 		this.sprite.body.gravity.y = 1600
-		this.sprite.body.velocity.x = 75
+		this.sprite.body.velocity.x = this.base_speed
 
 		// Load animations
+		// TODO: Make this more generic
 		this.sprite.animations.add("walk_left", [0, 1, 2, 3, 4, 5], 10, true)
 		this.sprite.animations.add("walk_right", [6, 7, 8, 9, 10, 11], 10, true)
 		this.sprite.animations.add("idle", [12, 13, 14, 15, 16, 17], 5, true)
 
 		this.sprite.animations.play("walk_left")
+	}
+
+	get is_moving() {
+		return this._is_moving
+	}
+
+	get health() {
+		return this._health
+	}
+
+	set health(new_value) {
+		this._health = new_value
+	}
+
+	get speed() {
+		return this._base_speed
+	}
+
+	set speed(new_value) {
+		this._base_speed = new_value
 	}
 
 	/*
@@ -58,6 +83,7 @@ class Entity {
 		}
 	}
 
+	// TODO: Make this generic
 	selectAnimation() {
 		if (this.sprite.body.velocity.x > 0) {
 			this.sprite.animations.play("walk_right")
@@ -107,25 +133,41 @@ class Player {
 
 	}
 
+	get health() {
+		return this._health
+	}
+
+	set health(new_value) {
+		this._health = new_value
+	}
+
+	get speed() {
+		return this._base_speed
+	}
+
+	set speed(new_value) {
+		this._speed = new_value
+	}
+
 	// Move the player
-	setVelocityX(new_velocity) {
+	set velocity_x(new_velocity) {
 		this.sprite.body.velocity.x = new_velocity
 	}
 
-	setVelocityY(new_velocity) {
+	set velocity_y(new_velocity) {
 		this.sprite.body.velocity.y = new_velocity
 	}
 
 	goLeft() {
-		this.setVelocityX(-1 * this.base_speed)
+		this._velocity_x(-1 * this.base_speed)
 	}
 
 	goRight() {
-		this.setVelocityX(this.base_speed)
+		this._velocity_x(this.base_speed)
 	}
 
 	jump() {
-		this.setVelocityY(-1 * this.jump_impulse)
+		this._velocity_y(-1 * this.jump_impulse)
 	}
 
 }
