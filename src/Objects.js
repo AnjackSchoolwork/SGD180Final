@@ -132,7 +132,13 @@ class Player {
 		this.health = 100
 		this.base_speed = 250
 		this.jump_impulse = 700
-		this.fired_bullets = []
+		this.fired_bullets = game.add.group()
+		this.fire_rate = 300 // Miliseconds
+		this.last_fired = Date.now()
+
+		// Hook events
+		game.input.onDown.add(this.click_handler, this, 0, game)
+		game.input.onUp.add(this.unShoot)
 	}
 
 	get x() {
@@ -184,9 +190,20 @@ class Player {
 		this.velocity_y = (-1 * this.jump_impulse)
 	}
 
+	// Mouse
+	click_handler(pointer, pointer_event, game) {
+		this.shoot(game)
+	}
+
 	// Weapon controls
 	shoot(game) {
-		this.fireBullet(game, this, 200, 200)
+		if (!this.firing) {
+			this.fireBullet(game)
+		}
+	}
+
+	unShoot(game) {
+		player.firing = false
 	}
 
 	/*
@@ -196,11 +213,14 @@ class Player {
 	* @param {number}	target_y	- Y-coordinate of target
 	* @param {string}	type		- Type of ammo to fire
 	*/
-	fireBullet(game, player, target_x, target_y) {
+	fireBullet(game, rotation) {
 		// TODO: Make bullet source (x, y) dynamic
-		var temp_bullet = game.add.sprite(this.x, this.y, 'test_bullet')
+		var temp_bullet = this.fired_bullets.create(this.x, this.y - (this.sprite.height / 2), 'test_bullet')
+		temp_bullet.anchor.set(0.5, 0.5)
 		game.physics.arcade.enable(temp_bullet)
-		temp_bullet.body.velocity.x = 1000
+		temp_bullet.rotation = game.physics.arcade.angleToPointer(temp_bullet)
+		game.physics.arcade.moveToPointer(temp_bullet, 700)
+		this.firing = true
 		this.fired_bullets.push(temp_bullet)
 	}
 
