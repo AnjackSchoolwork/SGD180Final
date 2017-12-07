@@ -221,7 +221,9 @@ class Player {
 		temp_bullet.rotation = game.physics.arcade.angleToPointer(temp_bullet)
 		game.physics.arcade.moveToPointer(temp_bullet, 700)
 		this.firing = true
-		this.fired_bullets.push(temp_bullet)
 	}
 
+	update(state, game) {
+		game.physics.arcade.collide(this.fired_bullets, state.layer, function (bullet, layer) { bullet.destroy() })
+	}
 }

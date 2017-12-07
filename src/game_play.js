@@ -71,6 +71,8 @@ game_play.prototype = {
 		checkInput(this.game, this.controls, player)
 
 		// TODO: Terminal velocity for player
+
+		player.update(this, this.game)
 	}
 
 }
