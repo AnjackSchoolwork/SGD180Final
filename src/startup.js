@@ -16,6 +16,7 @@ startup.prototype = {
 		this.game.load.spritesheet('button_play', 'img/Button_Play.png', 128, 64)
 		this.game.load.image('placeholder_player', 'img/Placeholder_Player.png', 32, 52)
 		this.game.load.spritesheet('test_slime', 'img/Test_Slime_Sheet.png', 32, 32)
+		this.game.load.spritesheet('test_bullet', 'img/Test_Bullet_Sheet.png', 64, 16)
 		
 		// Load all sound effects
 
@@ -29,6 +30,7 @@ startup.prototype = {
 		controls.up_key = this.game.input.keyboard.addKey(Phaser.Keyboard.W)
 		controls.down_key = this.game.input.keyboard.addKey(Phaser.Keyboard.S)
 		controls.jump_key = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+		controls.fire_key = this.game.input.keyboard.addKey(Phaser.Keyboard.F)
 
 
 		this.controls = controls

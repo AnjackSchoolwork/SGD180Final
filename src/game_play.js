@@ -66,16 +66,16 @@ game_play.prototype = {
 		})
 
 		// Movement & controls
-		player.setVelocityX(0)
+		player.velocity_x = 0
 		// Player control input
-		checkInput(this.controls, player)
+		checkInput(this.game, this.controls, player)
 
 		// TODO: Terminal velocity for player
 	}
 
 }
 
-function checkInput(controls, player) {
+function checkInput(game, controls, player) {
 	// TODO: Pull these numbers from config file or constants object
 
 	// Keyboard
@@ -88,6 +88,10 @@ function checkInput(controls, player) {
 
 	if (controls.jump_key.isDown && player.sprite.body.blocked.down && hit_platform) {
 		player.jump()
+	}
+
+	if (controls.fire_key.isDown) {
+		player.shoot(game)
 	}
 
 	// Gamepad

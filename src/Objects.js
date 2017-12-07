@@ -44,6 +44,10 @@ class Entity {
 		return this._is_moving
 	}
 
+	set is_moving(new_value) {
+		this._is_moving = new_value
+	}
+
 	get health() {
 		return this._health
 	}
@@ -120,17 +124,23 @@ class Player {
 		// Build sprite
 		this.sprite = game.add.sprite(x, y, image)
 		this.sprite.entity = this
-
 		this.sprite.anchor.set(0.5, 1)
 		game.physics.arcade.enable(this.sprite)
-
 		this.sprite.body.gravity.y = 1600
 
 		// Initialize variables
 		this.health = 100
 		this.base_speed = 250
 		this.jump_impulse = 700
+		this.fired_bullets = []
+	}
 
+	get x() {
+		return this.sprite.x
+	}
+
+	get y() {
+		return this.sprite.y
 	}
 
 	get health() {
@@ -149,6 +159,10 @@ class Player {
 		this._speed = new_value
 	}
 
+	get bullets() {
+		return this.fired_bullets
+	}
+
 	// Move the player
 	set velocity_x(new_velocity) {
 		this.sprite.body.velocity.x = new_velocity
@@ -159,15 +173,35 @@ class Player {
 	}
 
 	goLeft() {
-		this._velocity_x(-1 * this.base_speed)
+		this.velocity_x = (-1 * this.base_speed)
 	}
 
 	goRight() {
-		this._velocity_x(this.base_speed)
+		this.velocity_x = this.base_speed
 	}
 
 	jump() {
-		this._velocity_y(-1 * this.jump_impulse)
+		this.velocity_y = (-1 * this.jump_impulse)
+	}
+
+	// Weapon controls
+	shoot(game) {
+		this.fireBullet(game, this, 200, 200)
+	}
+
+	/*
+	* Creates a bullet sprite and sets its rotation and velocity.
+	* @param {object}	game		- Reference to Phaser.Game object
+	* @param {number}	target_x	- X-coordinate of target
+	* @param {number}	target_y	- Y-coordinate of target
+	* @param {string}	type		- Type of ammo to fire
+	*/
+	fireBullet(game, player, target_x, target_y) {
+		// TODO: Make bullet source (x, y) dynamic
+		var temp_bullet = game.add.sprite(this.x, this.y, 'test_bullet')
+		game.physics.arcade.enable(temp_bullet)
+		temp_bullet.body.velocity.x = 1000
+		this.fired_bullets.push(temp_bullet)
 	}
 
 }
