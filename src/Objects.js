@@ -132,9 +132,9 @@ class Player {
 		this.health = 100
 		this.base_speed = 250
 		this.jump_impulse = 700
-		this.fired_bullets = game.add.group()
 		this.fire_rate = 300 // Miliseconds
 		this.last_fired = Date.now()
+		this.fired_bullets = {}
 
 		// Hook events
 		game.input.onDown.add(this.click_handler, this, 0, game)
@@ -163,10 +163,6 @@ class Player {
 
 	set speed(new_value) {
 		this._speed = new_value
-	}
-
-	get bullets() {
-		return this.fired_bullets
 	}
 
 	// Move the player
@@ -213,17 +209,12 @@ class Player {
 	* @param {number}	target_y	- Y-coordinate of target
 	* @param {string}	type		- Type of ammo to fire
 	*/
-	fireBullet(game, rotation) {
+	fireBullet(game) {
 		// TODO: Make bullet source (x, y) dynamic
 		var temp_bullet = this.fired_bullets.create(this.x, this.y - (this.sprite.height / 2), 'test_bullet')
 		temp_bullet.anchor.set(0.5, 0.5)
-		game.physics.arcade.enable(temp_bullet)
 		temp_bullet.rotation = game.physics.arcade.angleToPointer(temp_bullet)
 		game.physics.arcade.moveToPointer(temp_bullet, 700)
 		this.firing = true
-	}
-
-	update(state, game) {
-		game.physics.arcade.collide(this.fired_bullets, state.layer, function (bullet, layer) { bullet.destroy() })
 	}
 }

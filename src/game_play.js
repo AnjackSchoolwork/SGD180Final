@@ -42,11 +42,15 @@ game_play.prototype = {
 			else if (object_list[index].type == "Player") {
 				player = new Player(this, object_list[index].x, object_list[index].y, "placeholder_player")
 
-				// Load interactable objects
+				player.fired_bullets = this.game.add.group()
+				player.fired_bullets.enableBody = true
 
-				// Load pickup-able objects
-
+				
 			}
+
+			// Load interactable objects
+
+			// Load pickup-able objects
 		}
 
 
@@ -59,6 +63,9 @@ game_play.prototype = {
 		// Collisions
 		hit_platform = this.game.physics.arcade.collide(player.sprite, layer)
 		hit_enemies_platform = this.game.physics.arcade.collide(enemies, layer)
+		hit_bullets = this.game.physics.arcade.collide(player.fired_bullets, layer, function (bullet, layer) {
+			bullet.kill()
+		})
 
 		// Enemy pseudo-ai
 		enemies.forEachExists(function (enemy) {
@@ -71,8 +78,9 @@ game_play.prototype = {
 		checkInput(this.game, this.controls, player)
 
 		// TODO: Terminal velocity for player
-
-		player.update(this, this.game)
+		player.fired_bullets.forEachDead(function (bullet) {
+			bullet.destroy()
+		}, this)
 	}
 
 }
