@@ -41,8 +41,12 @@ game_play.prototype = {
 		for (var index in object_list) {
 			// First load entities
 			if (object_list[index].type == 'Slime') {
-				var temp_entity = new Entity(this, enemies, object_list[index].x, object_list[index].y, "test_slime")
+				var temp_entity = new MobileEntity(this, enemies, object_list[index].x, object_list[index].y, "test_slime")
 
+				// Load animations
+				temp_entity.sprite.animations.add("walk_left", [0, 1, 2, 3, 4, 5], 10, true)
+				temp_entity.sprite.animations.add("walk_right", [6, 7, 8, 9, 10, 11], 10, true)
+				temp_entity.sprite.animations.add("idle", [12, 13, 14, 15, 16, 17], 5, true)
 			}
 			// Next load player
 			else if (object_list[index].type == 'Player') {

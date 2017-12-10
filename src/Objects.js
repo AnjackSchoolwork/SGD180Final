@@ -24,29 +24,7 @@ class Entity {
 
 		// Initialize properties
 		this.health = 100
-		this.base_speed = 75
 
-		// Start in motion, with gravity
-		this.is_moving = true
-		this.sprite.body.gravity.y = 1600
-		this.sprite.body.velocity.x = this.base_speed
-		this.sprite.body.immovable = true
-
-		// Load animations
-		// TODO: Make this more generic
-		this.sprite.animations.add("walk_left", [0, 1, 2, 3, 4, 5], 10, true)
-		this.sprite.animations.add("walk_right", [6, 7, 8, 9, 10, 11], 10, true)
-		this.sprite.animations.add("idle", [12, 13, 14, 15, 16, 17], 5, true)
-
-		this.sprite.animations.play("walk_left")
-	}
-
-	get is_moving() {
-		return this._is_moving
-	}
-
-	set is_moving(new_value) {
-		this._is_moving = new_value
 	}
 
 	get health() {
@@ -55,6 +33,82 @@ class Entity {
 
 	set health(new_value) {
 		this._health = new_value
+	}
+
+	
+
+	/*
+	* Anything that deals damage to this entity should use this method to do so.
+	* 
+	* @param {string}	dmg_type	- Name of the type of damage being dealt.
+	* @param {number}	dmg_amt		- Amount of damage in points.
+	*/
+	handleDamage(dmg_type, dmg_amt) {
+		this.displayDamageEffect()
+		this.health -= dmg_amt
+	}
+
+	/*
+	* Flash the sprite red to show that we took damage.
+	*/
+	displayDamageEffect() {
+		this.sprite.tint = 0xff4444
+		setTimeout(function (p_sprite) {
+			p_sprite.tint = 0xFFFFFF
+
+			// Calling it here to ensure damage is visible before sprite is killed
+			p_sprite.entity.dieIfDead()
+		}, 100, this.sprite)
+	}
+
+	// Did you die?
+	dieIfDead() {
+		if (this.health <= 0) {
+			this.destroy()
+		}
+	}
+
+	// Remove references to this object
+	destroy() {
+		this.sprite.destroy()
+	}
+
+	/*
+	* This is the entry point for Entity AI.
+	* This calls detection and action functions.
+	* 
+	* @param {object}	game	- Reference to Phaser.Game object
+	* @param {object}	map		- Reference to tilemap object
+	* @param {object}	player	- Reference to player object
+	*/
+	think(game, map, player) {
+		// Walkies
+		this.edgeCheck(map)
+		this.wallCheck()
+		this.selectAnimation()
+	}
+}
+
+class MobileEntity extends Entity {
+	constructor(game, group, x, y, image) {
+		super(game, group, x, y, image)
+
+		this.base_speed = 75
+
+		// Start in motion, with gravity
+		this.is_moving = true
+		this.sprite.body.gravity.y = 1600
+		this.sprite.body.velocity.x = this.base_speed
+		this.sprite.body.immovable = true
+	}
+
+
+	get is_moving() {
+		return this._is_moving
+	}
+
+	set is_moving(new_value) {
+		this._is_moving = new_value
 	}
 
 	get speed() {
@@ -101,42 +155,6 @@ class Entity {
 		else {
 			this.sprite.animations.play("idle")
 		}
-	}
-
-	/*
-	* Anything that deals damage to this entity should use this method to do so.
-	* 
-	* @param {string}	dmg_type	- Name of the type of damage being dealt.
-	* @param {number}	dmg_amt		- Amount of damage in points.
-	*/
-	handleDamage(dmg_type, dmg_amt) {
-		this.displayDamageEffect()
-		this.health -= dmg_amt
-	}
-
-	/*
-	* Flash the sprite red to show that we took damage.
-	*/
-	displayDamageEffect() {
-		this.sprite.tint = 0xff4444
-		setTimeout(function (p_sprite) {
-			p_sprite.tint = 0xFFFFFF
-
-			// Calling it here to ensure damage is visible before sprite is killed
-			p_sprite.entity.dieIfDead()
-		}, 100, this.sprite)
-	}
-
-	// Did you die?
-	dieIfDead() {
-		if (this.health <= 0) {
-			this.destroy()
-		}
-	}
-
-	// Remove references to this object
-	destroy() {
-		this.sprite.destroy()
 	}
 
 	/*
@@ -266,6 +284,7 @@ class Player {
 
 class PickUp {
 	constructor(game, group, x, y, image) {
-		
+
 	}
+
 }
