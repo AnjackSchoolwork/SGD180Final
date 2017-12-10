@@ -97,8 +97,10 @@ game_play.prototype = {
 	update: function () {
 
 		// Collisions
+		// TODO: Move callbacks into object code
 		hit_platform = this.game.physics.arcade.collide(player.sprite, layer)
 		this.game.physics.arcade.collide(enemies, layer)
+		this.game.physics.arcade.overlap(player.sprite, enemies, enemyHitPlayerMelee)
 		this.game.physics.arcade.collide(player.fired_bullets, layer, function (bullet, layer) {
 			bullet.kill()
 		})
@@ -107,7 +109,7 @@ game_play.prototype = {
 			enemy.entity.handleDamage(null, 30)
 		})
 		this.game.physics.arcade.collide(player.sprite, doors, checkDoorKey)
-		this.game.physics.arcade.collide(player.sprite, door_keys, pickUpKey)
+		this.game.physics.arcade.overlap(player.sprite, door_keys, pickUpKey)
 
 		// Enemy pseudo-ai
 		enemies.forEachExists(function (enemy) {
@@ -121,19 +123,37 @@ game_play.prototype = {
 
 		// TODO: Terminal velocity for player
 
+		// Remove dead objects
 		player.fired_bullets.forEachDead(function (bullet) {
 			bullet.destroy()
+		}, this)
+
+		doors.forEachDead(function (item) {
+			item.destroy()
+		}, this)
+
+		door_keys.forEachDead(function (item) {
+			item.destroy()
 		}, this)
 	}
 
 }
 
 /*
+* Enemy hits player
+*/
+function enemyHitPlayerMelee(p_sprite, enemy) {
+	// TODO: Check enemy for damage type & amount
+	console.log(p_sprite.entity.health)
+	p_sprite.entity.handleDamage(null, 30)
+}
+
+/*
 * Pick up the key
 */
-function pickUpKey(player, key) {
+function pickUpKey(p_sprite, key) {
 	// TODO: Need to check if key is already in inventory
-	player.entity.key_ring.push(key.entity.door_key)
+	p_sprite.entity.key_ring.push(key.entity.door_key)
 	key.kill()
 }
 
@@ -141,15 +161,13 @@ function pickUpKey(player, key) {
 * Check to see if player has appropriate key for collided door.
 *
 */
-function checkDoorKey(player, door) {
-	for (var index in player.entity.key_ring) {
-		if (player.entity.key_ring[index] == door.key) {
-			console.log("OPEN SESAME")
+function checkDoorKey(p_sprite, door) {
+	for (var index in p_sprite.entity.key_ring) {
+		if (p_sprite.entity.key_ring[index] == door.key) {
 			door.kill()
 			return
 		}
 	}
-	console.log("UNAUTHORIZED")
 }
 
 function checkInput(game, controls, player) {

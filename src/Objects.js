@@ -20,7 +20,6 @@ class Entity {
 		this.sprite = group.create(x, y, image)
 		this.sprite.entity = this
 		this.sprite.anchor.set(0.5, 1)
-		game.physics.arcade.enable(this.sprite)
 
 		// Initialize properties
 		this.health = 100
@@ -174,6 +173,9 @@ class MobileEntity extends Entity {
 class Player {
 	constructor(game, x, y, image) {
 
+		// Reference to Phaser.Game object
+		this.game = game
+
 		// Build sprite
 		this.sprite = game.add.sprite(x, y, image)
 		this.sprite.entity = this
@@ -276,13 +278,24 @@ class Player {
 		game.physics.arcade.moveToPointer(temp_bullet, 700)
 		this.firing = true
 	}
+
+	handleDamage(type, amount) {
+		this.health -= amount
+		this.dieIfDead()
+	}
+
+	dieIfDead() {
+		if (this.health <= 0) {
+			this.sprite.kill()
+			this.game.state.start('Game Over')
+		}
+	}
 }
 
 class PickUp extends Entity{
 	constructor(game, group, x, y, image) {
 		super(game, group, x, y, image)
-
-		this.sprite.immovable = true
+		
 	}
 
 }
