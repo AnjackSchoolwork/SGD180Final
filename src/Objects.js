@@ -31,7 +31,6 @@ class Entity {
 		this.sprite.body.gravity.y = 1600
 		this.sprite.body.velocity.x = this.base_speed
 		this.sprite.body.immovable = true
-		this.sprite.body.maxVelocity = 200
 
 		// Load animations
 		// TODO: Make this more generic
@@ -83,9 +82,11 @@ class Entity {
 	}
 
 	wallCheck() {
-		if ((this.sprite.body.blocked.left && this.sprite.body.velocity.x < 0) ||
-			(this.sprite.body.blocked.right && this.sprite.body.velocity.x > 0)) {
-			this.sprite.body.velocity.x *= -1
+		if (this.sprite.body.blocked.left) {
+			this.sprite.body.velocity.x = this.base_speed
+		}
+		if (this.sprite.body.blocked.right) {
+			this.sprite.body.velocity.x = -1 * this.base_speed
 		}
 	}
 
@@ -165,6 +166,7 @@ class Player {
 		this.sprite.anchor.set(0.5, 1)
 		game.physics.arcade.enable(this.sprite)
 		this.sprite.body.gravity.y = 1600
+		this.sprite.body.maxVelocity = 100
 
 		// Initialize variables
 		this.health = 100
@@ -177,6 +179,11 @@ class Player {
 		// Hook events
 		game.input.onDown.add(this.click_handler, this, 0, game)
 		game.input.onUp.add(this.unShoot)
+
+		// Inventory
+
+		// Keys carried by player
+		this.key_ring = []
 	}
 
 	get x() {

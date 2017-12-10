@@ -12,19 +12,20 @@ game_play.prototype = {
 		// Load test map
 		this.game.load.tilemap('map_test', 'maps/Map_Test.json', null, Phaser.Tilemap.TILED_JSON)
 		this.game.load.image('tileset_one', 'img/Tileset_one.png')
-
-		//cursors = this.game.input.keyboard.createCursorKeys()
 	},
 
 	create: function () {
+
 		this.stage.backgroundColor = '#838383'
+
 		// Physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
+		this.game.physics.arcade.sortDirection = Phaser.Physics.Arcade.SORT_NONE
 
 		// Load the test map and tileset, with layer
 		map = this.game.add.tilemap('map_test') // GAH global :(
 		map.addTilesetImage('Tileset_One', 'tileset_one')
-		map.setCollisionBetween(0, 15)
+		map.setCollisionBetween(0, 40)
 		layer = map.createLayer('Tile Layer 1') // GAH global :(
 		layer.resizeWorld()
 
@@ -32,21 +33,31 @@ game_play.prototype = {
 		enemies = this.add.group()
 		enemies.enableBody = true
 
+		// Doors
+		doors = this.add.group()
+		doors.enableBody = true
+
 		var object_list = map.objects['Object Layer 1']
 		for (var index in object_list) {
 			// First load entities
-			if (object_list[index].type == "Slime") {
+			if (object_list[index].type == 'Slime') {
 				var temp_entity = new Entity(this, enemies, object_list[index].x, object_list[index].y, "test_slime")
 
 			}
 			// Next load player
-			else if (object_list[index].type == "Player") {
+			else if (object_list[index].type == 'Player') {
 				player = new Player(this, object_list[index].x, object_list[index].y, "placeholder_player")
 
 				player.fired_bullets = this.game.add.group()
 				player.fired_bullets.enableBody = true
 
 				
+			}
+			// We got doors!
+			else if (object_list[index].type == 'door') {
+				var temp_sprite = doors.create(object_list[index].x, object_list[index].y, object_list[index].name)
+				temp_sprite.anchor.set(0.5, 0.5)
+				temp_sprite.key = object_list[index].name
 			}
 
 			// Load interactable objects
@@ -57,6 +68,12 @@ game_play.prototype = {
 
 		// Configure the camera
 		this.game.camera.follow(player.sprite)
+		this.game.camera.deadzone = new Phaser.Rectangle(
+			this.game.camera.width / 4,
+			this.game.camera.height / 3,
+			this.game.camera.width - (this.game.camera.width / 2),
+			this.game.camera.height - (this.game.camera.height / 1.5)
+		)
 	},
 
 	update: function () {
@@ -71,6 +88,7 @@ game_play.prototype = {
 			bullet.kill()
 			enemy.entity.handleDamage(null, 30)
 		})
+		this.game.physics.arcade.collide(player.sprite, doors, checkDoorKey)
 
 		// Enemy pseudo-ai
 		enemies.forEachExists(function (enemy) {
@@ -89,6 +107,21 @@ game_play.prototype = {
 		}, this)
 	}
 
+}
+
+/*
+* Check to see if player has appropriate key for collided door.
+*
+*/
+function checkDoorKey(player, door) {
+	for (var index in player.key_ring) {
+		if (player.key_ring[index] == door.name) {
+			door.kill()
+			return
+		} else {
+			//player.speed = 0
+		}
+	}
 }
 
 function checkInput(game, controls, player) {
