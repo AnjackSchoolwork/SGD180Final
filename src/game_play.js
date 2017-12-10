@@ -37,6 +37,11 @@ game_play.prototype = {
 		doors = this.add.group()
 		doors.enableBody = true
 
+		// Keys for doors
+		door_keys = this.add.group()
+		door_keys.enableBody = true
+
+
 		var object_list = map.objects['Object Layer 1']
 		for (var index in object_list) {
 			// First load entities
@@ -63,6 +68,14 @@ game_play.prototype = {
 				temp_sprite.anchor.set(0.5, 0.5)
 				temp_sprite.key = object_list[index].name
 				temp_sprite.body.immovable = true
+			}
+			// Dem Keys
+			else if (object_list[index].type == 'door_key') {
+				var temp_pickup = new PickUp(this, door_keys, object_list[index].x, object_list[index].y, "pickup_placeholder")
+				temp_pickup.sprite.anchor.set(0.5, 1)
+
+				// What key is it?
+				temp_pickup.door_key = object_list[index].name
 			}
 
 			// Load interactable objects
@@ -94,6 +107,7 @@ game_play.prototype = {
 			enemy.entity.handleDamage(null, 30)
 		})
 		this.game.physics.arcade.collide(player.sprite, doors, checkDoorKey)
+		this.game.physics.arcade.collide(player.sprite, door_keys, pickUpKey)
 
 		// Enemy pseudo-ai
 		enemies.forEachExists(function (enemy) {
@@ -112,6 +126,15 @@ game_play.prototype = {
 		}, this)
 	}
 
+}
+
+/*
+* Pick up the key
+*/
+function pickUpKey(player, key) {
+	// TODO: Need to check if key is already in inventory
+	player.entity.key_ring.push(key.entity.door_key)
+	key.kill()
 }
 
 /*

@@ -25,8 +25,8 @@
                  "type":"Player",
                  "visible":true,
                  "width":0,
-                 "x":63.9848,
-                 "y":94.4848
+                 "x":816.833,
+                 "y":126.121
                 }, 
                 {
                  "height":0,
@@ -85,8 +85,20 @@
                  "type":"door",
                  "visible":true,
                  "width":0,
-                 "x":1102.54545454545,
-                 "y":400.545454545455
+                 "x":1102.55,
+                 "y":400.545
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"Door1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"door_key",
+                 "visible":true,
+                 "width":0,
+                 "x":974.727,
+                 "y":126.848
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -94,7 +106,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":23,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2017.11.22",

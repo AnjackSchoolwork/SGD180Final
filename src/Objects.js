@@ -82,10 +82,6 @@ class Entity {
 	* @param {object}	player	- Reference to player object
 	*/
 	think(game, map, player) {
-		// Walkies
-		this.edgeCheck(map)
-		this.wallCheck()
-		this.selectAnimation()
 	}
 }
 
@@ -282,9 +278,11 @@ class Player {
 	}
 }
 
-class PickUp {
+class PickUp extends Entity{
 	constructor(game, group, x, y, image) {
+		super(game, group, x, y, image)
 
+		this.sprite.immovable = true
 	}
 
 }

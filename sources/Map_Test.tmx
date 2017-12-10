@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="23">
+<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="25">
  <tileset firstgid="1" name="Tileset_Test" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../img/Tileset_Test.png" width="128" height="128"/>
  </tileset>
@@ -111,7 +111,7 @@
 </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="1" name="Player1" type="Player" x="63.9848" y="94.4848">
+  <object id="1" name="Player1" type="Player" x="816.833" y="126.121">
    <point/>
   </object>
   <object id="5" name="TestSlime" type="Slime" x="370.083" y="319.167">
@@ -127,6 +127,9 @@
    <point/>
   </object>
   <object id="21" name="Door1" type="door" x="1102.55" y="400.545">
+   <point/>
+  </object>
+  <object id="23" name="Door1" type="door_key" x="974.727" y="126.848">
    <point/>
   </object>
  </objectgroup>

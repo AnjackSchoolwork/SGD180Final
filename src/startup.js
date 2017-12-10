@@ -18,6 +18,7 @@ startup.prototype = {
 		this.game.load.spritesheet('test_slime', 'img/Test_Slime_Sheet.png', 32, 32)
 		this.game.load.spritesheet('test_bullet', 'img/Test_Bullet_Sheet.png', 32, 16)
 		this.game.load.image('Door1', 'img/door1.png')
+		this.game.load.image('pickup_placeholder', 'img/Pickup_Placeholder.png')
 		
 		// Load all sound effects
 
