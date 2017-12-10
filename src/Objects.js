@@ -30,6 +30,8 @@ class Entity {
 		this.is_moving = true
 		this.sprite.body.gravity.y = 1600
 		this.sprite.body.velocity.x = this.base_speed
+		this.sprite.body.immovable = true
+		this.sprite.body.maxVelocity = 200
 
 		// Load animations
 		// TODO: Make this more generic
@@ -98,6 +100,42 @@ class Entity {
 		else {
 			this.sprite.animations.play("idle")
 		}
+	}
+
+	/*
+	* Anything that deals damage to this entity should use this method to do so.
+	* 
+	* @param {string}	dmg_type	- Name of the type of damage being dealt.
+	* @param {number}	dmg_amt		- Amount of damage in points.
+	*/
+	handleDamage(dmg_type, dmg_amt) {
+		this.displayDamageEffect()
+		this.health -= dmg_amt
+	}
+
+	/*
+	* Flash the sprite red to show that we took damage.
+	*/
+	displayDamageEffect() {
+		this.sprite.tint = 0xff4444
+		setTimeout(function (p_sprite) {
+			p_sprite.tint = 0xFFFFFF
+
+			// Calling it here to ensure damage is visible before sprite is killed
+			p_sprite.entity.dieIfDead()
+		}, 100, this.sprite)
+	}
+
+	// Did you die?
+	dieIfDead() {
+		if (this.health <= 0) {
+			this.destroy()
+		}
+	}
+
+	// Remove references to this object
+	destroy() {
+		this.sprite.destroy()
 	}
 
 	/*

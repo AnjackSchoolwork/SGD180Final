@@ -91,11 +91,11 @@
         {
          "columns":4,
          "firstgid":1,
-         "image":"..\/img\/Tileset_Test.png",
+         "image":"..\/img\/Tileset_One.png",
          "imageheight":128,
          "imagewidth":128,
          "margin":0,
-         "name":"Tileset_Test",
+         "name":"Tileset_One",
          "spacing":0,
          "tilecount":16,
          "tileheight":32,

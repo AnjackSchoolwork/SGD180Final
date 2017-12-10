@@ -1,3 +1,9 @@
-﻿body
-{
+﻿body {
+    margin: auto;
+    text-align: center;
+}
+
+canvas {
+    display: block;
+    margin: auto;
 }

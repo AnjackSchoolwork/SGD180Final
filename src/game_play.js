@@ -11,18 +11,19 @@ game_play.prototype = {
 	preload: function () {
 		// Load test map
 		this.game.load.tilemap('map_test', 'maps/Map_Test.json', null, Phaser.Tilemap.TILED_JSON)
-		this.game.load.image('tileset_test', 'img/Tileset_Test.png')
+		this.game.load.image('tileset_one', 'img/Tileset_one.png')
 
 		//cursors = this.game.input.keyboard.createCursorKeys()
 	},
 
 	create: function () {
+		this.stage.backgroundColor = '#838383'
 		// Physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
 
 		// Load the test map and tileset, with layer
 		map = this.game.add.tilemap('map_test') // GAH global :(
-		map.addTilesetImage('Tileset_Test', 'tileset_test')
+		map.addTilesetImage('Tileset_One', 'tileset_one')
 		map.setCollisionBetween(0, 15)
 		layer = map.createLayer('Tile Layer 1') // GAH global :(
 		layer.resizeWorld()
@@ -62,9 +63,13 @@ game_play.prototype = {
 
 		// Collisions
 		hit_platform = this.game.physics.arcade.collide(player.sprite, layer)
-		hit_enemies_platform = this.game.physics.arcade.collide(enemies, layer)
-		hit_bullets = this.game.physics.arcade.collide(player.fired_bullets, layer, function (bullet, layer) {
+		this.game.physics.arcade.collide(enemies, layer)
+		this.game.physics.arcade.collide(player.fired_bullets, layer, function (bullet, layer) {
 			bullet.kill()
+		})
+		this.game.physics.arcade.collide(player.fired_bullets, enemies, function (bullet, enemy) {
+			bullet.kill()
+			enemy.entity.handleDamage(null, 30)
 		})
 
 		// Enemy pseudo-ai
@@ -78,6 +83,7 @@ game_play.prototype = {
 		checkInput(this.game, this.controls, player)
 
 		// TODO: Terminal velocity for player
+
 		player.fired_bullets.forEachDead(function (bullet) {
 			bullet.destroy()
 		}, this)
