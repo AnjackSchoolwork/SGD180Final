@@ -144,8 +144,14 @@ game_play.prototype = {
 */
 function enemyHitPlayerMelee(p_sprite, enemy) {
 	// TODO: Check enemy for damage type & amount
-	console.log(p_sprite.entity.health)
 	p_sprite.entity.handleDamage(null, 30)
+	p_sprite.entity.flinch(enemy)
+	if (p_sprite.x > enemy.x) {
+		enemy.entity.goLeft()
+	}
+	else {
+		enemy.entity.goRight()
+	}
 }
 
 /*

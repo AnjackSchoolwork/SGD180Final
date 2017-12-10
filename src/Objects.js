@@ -114,6 +114,22 @@ class MobileEntity extends Entity {
 		this._base_speed = new_value
 	}
 
+	set velocity_x(new_velocity) {
+		this.sprite.body.velocity.x = new_velocity
+	}
+
+	set velocity_y(new_velocity) {
+		this.sprite.body.velocity.y = new_velocity
+	}
+
+	goLeft() {
+		this.velocity_x = (-1 * this.base_speed)
+	}
+
+	goRight() {
+		this.velocity_x = this.base_speed
+	}
+
 	/*
 	* Checks for a tile at the bottom-right corner of this entity's sprite.
 	* Reverses direction if no tile is found.
@@ -245,6 +261,30 @@ class Player {
 
 	jump() {
 		this.velocity_y = (-1 * this.jump_impulse)
+	}
+
+	/*
+	* Flash the sprite red to show that we took damage.
+	*/
+	displayDamageEffect() {
+		this.sprite.tint = 0xff4444
+		setTimeout(function (p_sprite) {
+			p_sprite.tint = 0xFFFFFF
+
+			// Calling it here to ensure damage is visible before sprite is killed
+			p_sprite.entity.dieIfDead()
+		}, 100, this.sprite)
+	}
+
+	// TODO: Figure out why x movement isn't happening
+	flinch(from_entity) {
+		this.displayDamageEffect()
+		if (this.sprite.x > from_entity.x) {
+			this.sprite.body.velocity = new Phaser.Point(1000, -150)
+		}
+		else {
+			this.sprite.body.velocity = new Phaser.Point(-1000, -150)
+		}
 	}
 
 	// Mouse
