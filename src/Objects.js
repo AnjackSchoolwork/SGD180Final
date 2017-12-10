@@ -216,6 +216,14 @@ class Player {
 
 		// Keys carried by player
 		this.key_ring = []
+
+
+		// In case we fall out of the map due to Phaser's "superb" physics engine
+		this.sprite.checkWorldBounds = true
+		this.sprite.events.onOutOfBounds.add(function () {
+			this.health = 0
+			this.dieIfDead()
+		}, this)
 	}
 
 	get x() {
@@ -338,4 +346,50 @@ class PickUp extends Entity{
 		
 	}
 
+}
+
+/*
+* This will handle the basic user interface.
+*/
+class GameUI {
+	constructor(game, player) {
+		this.game = game
+		this.player = player
+
+		var x = this.game.camera.x
+		var y = this.game.camera.y
+
+		this.graphics = this.game.add.graphics(x, y)
+		// This makes the drawn objects follow the camera
+		this.graphics.fixedToCamera = true
+
+		this.text_style = {
+			fontSize: '24px',
+			fill: '#fff',
+			boundsAlignH: 'center',
+			boundsAlignV: 'middle'
+		}
+
+		this.graphics.beginFill(0x000000, 1)
+		this.graphics.drawRect(x, y, 200, 40)
+		this.graphics.endFill()
+
+		this.health_label = this.game.add.text(0, 0, 'Health', this.text_style)
+		this.health_label.setTextBounds(x, y, 200, 40)
+		this.health_label.fixedToCamera = true
+
+		this.update()
+	}
+
+	// Redraw health bar
+	update() {
+		this.graphics.clear()
+
+		this.graphics.beginFill(0x33ff33, 0.5)
+		this.graphics.drawRect(0, 0, this.player.health * 2, 40)
+		this.graphics.endFill()
+
+		this.graphics.lineStyle(2, 0xffffff, 1)
+		this.graphics.drawRect(0, 0, 200, 40)
+	}
 }

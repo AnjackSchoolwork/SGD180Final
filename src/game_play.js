@@ -75,7 +75,7 @@ game_play.prototype = {
 				temp_pickup.sprite.anchor.set(0.5, 1)
 
 				// What key is it?
-				temp_pickup.door_key = object_list[index].name
+				temp_pickup.door_key = object_list[index].properties.Door
 			}
 
 			// Load interactable objects
@@ -92,6 +92,8 @@ game_play.prototype = {
 			this.game.camera.width - (this.game.camera.width / 2),
 			this.game.camera.height - (this.game.camera.height / 1.5)
 		)
+
+		this.game_ui = new GameUI(this.game, player)
 	},
 
 	update: function () {
@@ -135,6 +137,8 @@ game_play.prototype = {
 		door_keys.forEachDead(function (item) {
 			item.destroy()
 		}, this)
+
+		this.game_ui.update()
 	}
 
 }
@@ -144,7 +148,7 @@ game_play.prototype = {
 */
 function enemyHitPlayerMelee(p_sprite, enemy) {
 	// TODO: Check enemy for damage type & amount
-	p_sprite.entity.handleDamage(null, 30)
+	p_sprite.entity.handleDamage(null, 3)
 	p_sprite.entity.flinch(enemy)
 	if (p_sprite.x > enemy.x) {
 		enemy.entity.goLeft()
