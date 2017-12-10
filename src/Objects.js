@@ -263,3 +263,9 @@ class Player {
 		this.firing = true
 	}
 }
+
+class PickUp {
+	constructor(game, group, x, y, image) {
+		
+	}
+}

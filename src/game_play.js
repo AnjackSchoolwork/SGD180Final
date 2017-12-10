@@ -58,6 +58,7 @@ game_play.prototype = {
 				var temp_sprite = doors.create(object_list[index].x, object_list[index].y, object_list[index].name)
 				temp_sprite.anchor.set(0.5, 0.5)
 				temp_sprite.key = object_list[index].name
+				temp_sprite.body.immovable = true
 			}
 
 			// Load interactable objects
@@ -114,14 +115,14 @@ game_play.prototype = {
 *
 */
 function checkDoorKey(player, door) {
-	for (var index in player.key_ring) {
-		if (player.key_ring[index] == door.name) {
+	for (var index in player.entity.key_ring) {
+		if (player.entity.key_ring[index] == door.key) {
+			console.log("OPEN SESAME")
 			door.kill()
 			return
-		} else {
-			//player.speed = 0
 		}
 	}
+	console.log("UNAUTHORIZED")
 }
 
 function checkInput(game, controls, player) {
