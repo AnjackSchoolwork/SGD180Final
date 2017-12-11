@@ -16,6 +16,9 @@ class Entity {
 	* @param {string}	image	- (Phaser) ID of image to use for sprite
 	*/
 	constructor(game, group, x, y, image) {
+
+		this.game = game
+
 		// Sprite
 		this.sprite = group.create(x, y, image)
 		this.sprite.entity = this
@@ -23,6 +26,7 @@ class Entity {
 
 		// Initialize properties
 		this.health = 100
+		this.value = 10
 
 
 		// Load SFX
@@ -67,6 +71,7 @@ class Entity {
 	// Did you die?
 	dieIfDead() {
 		if (this.health <= 0) {
+			this.game.addScore(this.value)
 			this.destroy()
 		}
 	}
@@ -346,7 +351,7 @@ class Player {
 	dieIfDead() {
 		if (this.health <= 0) {
 			this.sprite.kill()
-			this.game.state.start('Game Over', true, false, this.game.controls, "You died.")
+			this.game.state.start('Game Over', true, false, this.game.controls, "You died.", this.game.score)
 		}
 	}
 }
@@ -389,6 +394,11 @@ class GameUI {
 		this.health_label.setTextBounds(x, y, 200, 40)
 		this.health_label.fixedToCamera = true
 
+		this.score_label = this.game.add.text(this.game.camera.width, 0, 'Score: ' + this.game.score, this.text_style)
+		this.score_label.anchor.set(1, 0)
+		//this.score_label.setTextBounds(0, 0, 200, 40)
+		this.score_label.fixedToCamera = true
+
 		this.update()
 	}
 
@@ -402,5 +412,7 @@ class GameUI {
 
 		this.graphics.lineStyle(2, 0xffffff, 1)
 		this.graphics.drawRect(0, 0, 200, 40)
+
+		this.score_label.text = 'Score: ' + this.game.score
 	}
 }

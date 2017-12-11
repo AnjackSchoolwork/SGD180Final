@@ -16,6 +16,9 @@ game_play.prototype = {
 
 	create: function () {
 
+		// Initialize score to 0
+		this.game.score = 0
+
 		this.stage.backgroundColor = '#838383'
 
 		// Load SFX
@@ -155,8 +158,13 @@ game_play.prototype = {
 		}, this)
 
 		this.game_ui.update()
-	}
+	},
 
+	addScore: function (value) {
+		console.log(value)
+		this.game.score += value
+		console.log(this.game.score)
+	}
 }
 
 // Tell the player what button to push
@@ -232,7 +240,7 @@ function checkInput(game, controls, player) {
 	if (controls.use_key.isDown) {
 		if (player.sprite.overlap(game.exit_door)) {
 			game.game_over_sound.play()
-			game.state.start('Game Over', true, false, controls, "You escaped!")
+			game.state.start('Game Over', true, false, controls, "You escaped!", game.score)
 		}
 	}
 

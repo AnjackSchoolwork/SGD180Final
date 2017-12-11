@@ -5,10 +5,11 @@ var game_over = function () {
 
 game_over.prototype = {
 
-	init: function (controls, exit_message) {
+	init: function (controls, exit_message, score) {
 		// Get the controls from the previous state
 		this.message = exit_message
 		this.controls = controls
+		this.score = score
 	},
 
 	preload: function () {
@@ -18,6 +19,9 @@ game_over.prototype = {
 	create: function () {
 		game_over_message = this.game.add.text(0, 0, 'Game Over: ' + this.message, { fontSize: '32px', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' })
 		game_over_message.setTextBounds(0, (this.game.height / 2) - 100, this.game.width, 200)
+
+		score_message = this.game.add.text(0, 0, 'Score: ' + this.score, { fontSize: '24px', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' })
+		score_message.setTextBounds(0, (this.game.height / 2) - 50, this.game.width, 200)
 
 		game_over_instructions = this.game.add.text(0, 0, 'Press ENTER to restart.', { fontSize: '24px', fill: '#fff', boundsAlignH: 'center', boundsAlignV: 'middle' })
 		game_over_instructions.setTextBounds(0, (this.game.height / 2), this.game.width, 200)
