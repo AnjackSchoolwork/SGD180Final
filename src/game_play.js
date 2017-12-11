@@ -60,6 +60,13 @@ game_play.prototype = {
 				temp_entity.sprite.animations.add("walk_right", [6, 7, 8, 9, 10, 11], 10, true)
 				temp_entity.sprite.animations.add("idle", [12, 13, 14, 15, 16, 17], 5, true)
 			}
+			else if (object_list[index].type == 'Bat') {
+				var temp_entity = new FlyingEntity(this, enemies, object_list[index].x, object_list[index].y, "Bat_Base")
+
+				// Load Animations
+				temp_entity.sprite.animations.add("fly", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true)
+				temp_entity.sprite.animations.play("fly")
+			}
 			// And an exit
 			else if (object_list[index].type == 'portal') {
 				this.game.exit_door = this.game.add.sprite(object_list[index].x, object_list[index].y, "Door_Big")
@@ -95,6 +102,9 @@ game_play.prototype = {
 			}
 			
 		}
+
+		// Bring player sprite to the front
+		this.game.world.bringToTop(player.sprite)
 
 
 		// Configure the camera
@@ -134,13 +144,13 @@ game_play.prototype = {
 
 		// Enemy pseudo-ai
 		enemies.forEachExists(function (enemy) {
-			enemy.entity.think(this, map, player.sprite)
+			enemy.entity.think(game, map, player)
 		})
 
 		// Movement & controls
 		player.velocity_x = 0
 		// Player control input
-		checkInput(this.game, this.controls, player)
+		checkInput(game, this.controls, player)
 
 		// TODO: Terminal velocity for player
 
@@ -161,9 +171,7 @@ game_play.prototype = {
 	},
 
 	addScore: function (value) {
-		console.log(value)
 		this.game.score += value
-		console.log(this.game.score)
 	}
 }
 
@@ -188,8 +196,7 @@ function promptExit(player, exit) {
 */
 function enemyHitPlayerMelee(p_sprite, enemy) {
 	// TODO: Check enemy for damage type & amount
-	p_sprite.entity.handleDamage(null, 3)
-	p_sprite.entity.flinch(enemy)
+	p_sprite.entity.handleDamage(enemy.entity)
 	if (p_sprite.x > enemy.x) {
 		enemy.entity.goLeft()
 	}

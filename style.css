@@ -6,4 +6,5 @@
 canvas {
     display: block;
     margin: auto;
+    cursor: url(img/Crosshair.png) 32 32, progress;
 }

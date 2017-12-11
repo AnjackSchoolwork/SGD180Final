@@ -27,6 +27,7 @@ class Entity {
 		// Initialize properties
 		this.health = 100
 		this.value = 10
+		this.damage = 10
 
 
 		// Load SFX
@@ -193,19 +194,85 @@ class MobileEntity extends Entity {
 	}
 }
 
+class FlyingEntity extends Entity {
+	constructor(game, group, x, y, image) {
+		super(game, group, x, y, image)
+
+		this.base_speed = 50
+
+		// Start still, no gravity
+		this.is_moving = true
+		this.sprite.body.gravity.y = 0
+		this.sprite.body.velocity.x = 0
+		this.sprite.body.immovable = true
+	}
+
+
+	get is_moving() {
+		return this._is_moving
+	}
+
+	set is_moving(new_value) {
+		this._is_moving = new_value
+	}
+
+	get speed() {
+		return this._base_speed
+	}
+
+	set speed(new_value) {
+		this._base_speed = new_value
+	}
+
+	set velocity_x(new_velocity) {
+		this.sprite.body.velocity.x = new_velocity
+	}
+
+	set velocity_y(new_velocity) {
+		this.sprite.body.velocity.y = new_velocity
+	}
+
+	goLeft() {
+		this.velocity_x = (-1 * this.base_speed)
+	}
+
+	goRight() {
+		this.velocity_x = this.base_speed
+	}
+
+	/*
+	* This is the entry point for Entity AI.
+	* This calls detection and action functions.
+	* 
+	* @param {object}	game	- Reference to Phaser.Game object
+	* @param {object}	map		- Reference to tilemap object
+	* @param {object}	player	- Reference to player object
+	*/
+	think(game, map, player) {
+		if (game.physics.arcade.distanceBetween(this.sprite, player.sprite) <= 250) {
+			game.physics.arcade.moveToObject(this.sprite, player.sprite, this.base_speed)
+		}
+		else {
+			this.velocity_x = 0
+			this.velocity_y = 0
+		}
+	}
+}
+
 /*
 */
 class Player {
-	constructor(game, x, y, image) {
+	constructor(context, x, y, image) {
 
 		// Reference to Phaser.Game object
-		this.game = game
+		this.context = context
+		this.game = context.game
 
 		// Build sprite
-		this.sprite = game.add.sprite(x, y, image)
+		this.sprite = this.game.add.sprite(x, y, image)
 		this.sprite.entity = this
 		this.sprite.anchor.set(0.5, 1)
-		game.physics.arcade.enable(this.sprite)
+		this.game.physics.arcade.enable(this.sprite)
 		this.sprite.body.gravity.y = 1600
 		this.sprite.body.maxVelocity = 100
 
@@ -216,10 +283,11 @@ class Player {
 		this.fire_rate = 300 // Miliseconds
 		this.last_fired = Date.now()
 		this.fired_bullets = {}
+		this.invulnerable = false
 
 		// Hook events
-		game.input.onDown.add(this.click_handler, this, 0, game)
-		game.input.onUp.add(this.unShoot)
+		this.game.input.onDown.add(this.click_handler, this, 0, this.game)
+		this.game.input.onUp.add(this.unShoot)
 
 		// Inventory
 
@@ -343,15 +411,20 @@ class Player {
 		this.firing = true
 	}
 
-	handleDamage(type, amount) {
-		this.health -= amount
-		this.dieIfDead()
+	handleDamage(source) {
+		if (!this.invulnerable) {
+			this.health -= source.damage
+			this.flinch(source)
+			this.dieIfDead()
+			this.invulnerable = true
+			setTimeout(function (player) { player.invulnerable = false }, 300, this)
+		}
 	}
 
 	dieIfDead() {
 		if (this.health <= 0) {
 			this.sprite.kill()
-			this.game.state.start('Game Over', true, false, this.game.controls, "You died.", this.game.score)
+			this.game.state.start('Game Over', true, false, this.context.controls, "You died.", this.game.score)
 		}
 	}
 }
@@ -406,7 +479,7 @@ class GameUI {
 	update() {
 		this.graphics.clear()
 
-		this.graphics.beginFill(0x33ff33, 0.75)
+		this.graphics.beginFill(0x5fcde4, 0.75)
 		this.graphics.drawRect(0, 0, this.player.health * 2, 40)
 		this.graphics.endFill()
 
