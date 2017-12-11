@@ -53,6 +53,15 @@ game_play.prototype = {
 				temp_entity.sprite.animations.add("walk_right", [6, 7, 8, 9, 10, 11], 10, true)
 				temp_entity.sprite.animations.add("idle", [12, 13, 14, 15, 16, 17], 5, true)
 			}
+			// And an exit
+			else if (object_list[index].type == 'portal') {
+				this.game.exit_door = this.game.add.sprite(object_list[index].x, object_list[index].y, "Door_Big")
+				this.game.exit_door.anchor.set(0.5, 1)
+				this.game.exit_door.animations.add("open_door", [0, 1, 2, 3, 4], 10, false)
+				this.game.exit_door.animations.add("close_door", [4, 3, 2, 1, 0], 10, false)
+				this.game.physics.arcade.enable(this.game.exit_door)
+				this.game.exit_door.open = false
+			}
 			// Next load player
 			else if (object_list[index].type == 'Player') {
 				player = new Player(this, object_list[index].x, object_list[index].y, "placeholder_player")
@@ -65,22 +74,19 @@ game_play.prototype = {
 			// We got doors!
 			else if (object_list[index].type == 'door') {
 				var temp_sprite = doors.create(object_list[index].x, object_list[index].y, object_list[index].name)
-				temp_sprite.anchor.set(0.5, 0.5)
+				temp_sprite.anchor.set(0.5, 1)
 				temp_sprite.key = object_list[index].name
 				temp_sprite.body.immovable = true
 			}
 			// Dem Keys
 			else if (object_list[index].type == 'door_key') {
-				var temp_pickup = new PickUp(this, door_keys, object_list[index].x, object_list[index].y, "pickup_placeholder")
+				var temp_pickup = new PickUp(this, door_keys, object_list[index].x, object_list[index].y, object_list[index].name)
 				temp_pickup.sprite.anchor.set(0.5, 1)
 
 				// What key is it?
 				temp_pickup.door_key = object_list[index].properties.Door
 			}
-
-			// Load interactable objects
-
-			// Load pickup-able objects
+			
 		}
 
 
@@ -112,6 +118,7 @@ game_play.prototype = {
 		})
 		this.game.physics.arcade.collide(player.sprite, doors, checkDoorKey)
 		this.game.physics.arcade.overlap(player.sprite, door_keys, pickUpKey)
+		this.game.physics.arcade.overlap(player.sprite, this.game.exit_door, promptExit)
 
 		// Enemy pseudo-ai
 		enemies.forEachExists(function (enemy) {
@@ -141,6 +148,22 @@ game_play.prototype = {
 		this.game_ui.update()
 	}
 
+}
+
+// Tell the player what button to push
+function promptExit(player, exit) {
+	var game = player.game
+	var temp_text = game.add.text(exit.x, exit.y - exit.height, 'Press F to exit.', {
+		fontSize: '18px',
+		fill: '#fff',
+		boundsAlignH: 'center',
+		boundsAlignV: 'middle'
+	})
+	temp_text.anchor.set(0.5, 1)
+	if (!exit.open) {
+		exit.animations.play("open_door")
+		exit.open = true
+	}
 }
 
 /*
@@ -195,8 +218,10 @@ function checkInput(game, controls, player) {
 		player.jump()
 	}
 
-	if (controls.fire_key.isDown) {
-		player.shoot(game)
+	if (controls.use_key.isDown) {
+		if (player.sprite.overlap(game.exit_door)) {
+			game.state.start('Game Over', true, false, controls, "You escaped!")
+		}
 	}
 
 	// Gamepad

@@ -17,8 +17,11 @@ startup.prototype = {
 		this.game.load.image('placeholder_player', 'img/Placeholder_Player.png', 32, 52)
 		this.game.load.spritesheet('test_slime', 'img/Test_Slime_Sheet.png', 32, 32)
 		this.game.load.spritesheet('test_bullet', 'img/Test_Bullet_Sheet.png', 32, 16)
-		this.game.load.image('Door1', 'img/door1.png')
+		this.game.load.image('Door1', 'img/Keyed_Door_Base.png')
 		this.game.load.image('pickup_placeholder', 'img/Pickup_Placeholder.png')
+		this.game.load.image('Key1', 'img/Key_Base.png')
+		this.game.load.spritesheet('Door_Big', 'img/Doors_Big.png', 64, 64)
+		this.game.load.spritesheet('Bat_Base', 'img/Bat_Base.png', 32, 32)
 		
 		// Load all sound effects
 
@@ -32,7 +35,8 @@ startup.prototype = {
 		controls.up_key = this.game.input.keyboard.addKey(Phaser.Keyboard.W)
 		controls.down_key = this.game.input.keyboard.addKey(Phaser.Keyboard.S)
 		controls.jump_key = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
-		controls.fire_key = this.game.input.keyboard.addKey(Phaser.Keyboard.F)
+		controls.use_key = this.game.input.keyboard.addKey(Phaser.Keyboard.F)
+		controls.enter_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER)
 
 		this.controls = controls
 	},

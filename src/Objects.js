@@ -335,7 +335,7 @@ class Player {
 	dieIfDead() {
 		if (this.health <= 0) {
 			this.sprite.kill()
-			this.game.state.start('Game Over')
+			this.game.state.start('Game Over', true, false, this.game.controls, "You died.")
 		}
 	}
 }
@@ -385,7 +385,7 @@ class GameUI {
 	update() {
 		this.graphics.clear()
 
-		this.graphics.beginFill(0x33ff33, 0.5)
+		this.graphics.beginFill(0x33ff33, 0.75)
 		this.graphics.drawRect(0, 0, this.player.health * 2, 40)
 		this.graphics.endFill()
 

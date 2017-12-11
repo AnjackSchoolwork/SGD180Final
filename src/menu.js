@@ -37,7 +37,7 @@ menu.prototype = {
 			'button_play', clickButtonPlay, this, 0, 0, 1)
 		button_play.anchor.set(0.5, 0.5)
 
-		
+		console.log(this)
 	},
 
 	update: function () {
