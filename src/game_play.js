@@ -18,6 +18,10 @@ game_play.prototype = {
 
 		this.stage.backgroundColor = '#838383'
 
+		// Load SFX
+		this.game.game_over_sound = this.game.add.audio('Game Over')
+		this.game.pickup_sound = this.game.add.audio('Select')
+
 		// Physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
 		this.game.physics.arcade.sortDirection = Phaser.Physics.Arcade.SORT_NONE
@@ -107,6 +111,7 @@ game_play.prototype = {
 		// Collisions
 		// TODO: Move callbacks into object code
 		hit_platform = this.game.physics.arcade.collide(player.sprite, layer)
+		var game = this.game
 		this.game.physics.arcade.collide(enemies, layer)
 		this.game.physics.arcade.overlap(player.sprite, enemies, enemyHitPlayerMelee)
 		this.game.physics.arcade.collide(player.fired_bullets, layer, function (bullet, layer) {
@@ -116,8 +121,12 @@ game_play.prototype = {
 			bullet.kill()
 			enemy.entity.handleDamage(null, 30)
 		})
-		this.game.physics.arcade.collide(player.sprite, doors, checkDoorKey)
-		this.game.physics.arcade.overlap(player.sprite, door_keys, pickUpKey)
+		this.game.physics.arcade.collide(player.sprite, doors, function (p_sprite, door) {
+			checkDoorKey(p_sprite, door, game)
+		})
+		this.game.physics.arcade.overlap(player.sprite, door_keys, function (p_sprite, door) {
+			pickUpKey(p_sprite, door, game)
+		})
 		this.game.physics.arcade.overlap(player.sprite, this.game.exit_door, promptExit)
 
 		// Enemy pseudo-ai
@@ -184,20 +193,22 @@ function enemyHitPlayerMelee(p_sprite, enemy) {
 /*
 * Pick up the key
 */
-function pickUpKey(p_sprite, key) {
+function pickUpKey(p_sprite, key, game) {
 	// TODO: Need to check if key is already in inventory
 	p_sprite.entity.key_ring.push(key.entity.door_key)
 	key.kill()
+	game.pickup_sound.play()
 }
 
 /*
 * Check to see if player has appropriate key for collided door.
 *
 */
-function checkDoorKey(p_sprite, door) {
+function checkDoorKey(p_sprite, door, game) {
 	for (var index in p_sprite.entity.key_ring) {
 		if (p_sprite.entity.key_ring[index] == door.key) {
 			door.kill()
+			game.pickup_sound.play()
 			return
 		}
 	}
@@ -220,6 +231,7 @@ function checkInput(game, controls, player) {
 
 	if (controls.use_key.isDown) {
 		if (player.sprite.overlap(game.exit_door)) {
+			game.game_over_sound.play()
 			game.state.start('Game Over', true, false, controls, "You escaped!")
 		}
 	}

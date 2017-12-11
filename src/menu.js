@@ -24,6 +24,9 @@ menu.prototype = {
 	},
 
 	create: function () {
+		// Audio
+		this.menu_sound = this.game.add.audio('Select')
+
 		// Display the title image along with option buttons
 		// TODO: Check to see if menu is loaded during game and adjust content accordingly
 		var logo_title = this.game.add.sprite(
@@ -34,20 +37,22 @@ menu.prototype = {
 
 		var button_play = this.game.add.button(
 			this.game.world.width / 2, (this.game.world.height / 3) * 2, 
-			'button_play', clickButtonPlay, this, 0, 0, 1)
+			'button_play', this.clickButtonPlay, this, 0, 0, 1)
 		button_play.anchor.set(0.5, 0.5)
-
-		console.log(this)
+		
 	},
 
 	update: function () {
 
+	},
+
+	// Start the actual gameplay
+	// TODO: Reset player and level data
+	clickButtonPlay: function () {
+		// Play the sound
+		this.menu_sound.play()
+		// Pass the controls object to the next state because I don't like global variables
+		this.game.state.start('Game Play', true, false, this.controls)
 	}
 }
 
-// Start the actual gameplay
-// TODO: Reset player and level data
-function clickButtonPlay() {
-	// Pass the controls object to the next state because I don't like global variables
-	this.game.state.start('Game Play', true, false, this.controls)
-}

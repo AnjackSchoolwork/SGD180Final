@@ -24,6 +24,9 @@ class Entity {
 		// Initialize properties
 		this.health = 100
 
+
+		// Load SFX
+		this.hurt_sound = game.add.audio('Hit')
 	}
 
 	get health() {
@@ -45,6 +48,7 @@ class Entity {
 	handleDamage(dmg_type, dmg_amt) {
 		this.displayDamageEffect()
 		this.health -= dmg_amt
+		this.hurt_sound.play()
 	}
 
 	/*
@@ -217,6 +221,10 @@ class Player {
 		// Keys carried by player
 		this.key_ring = []
 
+		// Load SFX
+		this.hurt_sound = this.game.add.audio('Hit')
+		this.shoot_sound = this.game.add.audio('Shoot')
+		this.jump_sound = this.game.add.audio('Jump')
 
 		// In case we fall out of the map due to Phaser's "superb" physics engine
 		this.sprite.checkWorldBounds = true
@@ -269,6 +277,7 @@ class Player {
 
 	jump() {
 		this.velocity_y = (-1 * this.jump_impulse)
+		this.jump_sound.play()
 	}
 
 	/*
@@ -293,6 +302,7 @@ class Player {
 		else {
 			this.sprite.body.velocity = new Phaser.Point(-1000, -150)
 		}
+		this.hurt_sound.play()
 	}
 
 	// Mouse
@@ -304,6 +314,7 @@ class Player {
 	shoot(game) {
 		if (!this.firing) {
 			this.fireBullet(game)
+			this.shoot_sound.play()
 		}
 	}
 

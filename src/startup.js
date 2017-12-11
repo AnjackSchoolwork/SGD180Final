@@ -24,6 +24,11 @@ startup.prototype = {
 		this.game.load.spritesheet('Bat_Base', 'img/Bat_Base.png', 32, 32)
 		
 		// Load all sound effects
+		this.game.load.audio('Shoot', 'audio/Shoot.mp3')
+		this.game.load.audio('Select', 'audio/Select.mp3')
+		this.game.load.audio('Jump', 'audio/Jump.mp3')
+		this.game.load.audio('Hit', 'audio/Hit.mp3')
+		this.game.load.audio('Game Over', 'audio/Game_Over.mp3')
 
 		// Music and tilesets will be loaded per-level
 
