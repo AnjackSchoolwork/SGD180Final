@@ -1,10 +1,13 @@
 ﻿body {
     margin: auto;
     text-align: center;
+    background-color: #66B2AF;
 }
 
 canvas {
     display: block;
     margin: auto;
     cursor: url(img/Crosshair.png) 32 32, progress;
+    border-width: 1px;
+    border-style: solid;
 }
