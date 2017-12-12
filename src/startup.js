@@ -22,6 +22,7 @@ startup.prototype = {
 		this.game.load.image('Key1', 'img/Key_Base.png')
 		this.game.load.spritesheet('Door_Big', 'img/Doors_Big.png', 64, 64)
 		this.game.load.spritesheet('Bat_Base', 'img/Bat_Base.png', 32, 32)
+		this.game.load.spritesheet('Lava', 'img/Lava.png', 32, 26)
 		
 		// Load all sound effects
 		this.game.load.audio('Shoot', 'audio/Shoot.mp3')

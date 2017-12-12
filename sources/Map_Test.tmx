@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="50" height="60" tilewidth="32" tileheight="32" infinite="0" nextobjectid="45">
+<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="50" height="60" tilewidth="32" tileheight="32" infinite="0" nextobjectid="85">
  <tileset firstgid="1" name="Tileset_Test" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../img/Tileset_Test.png" width="128" height="128"/>
  </tileset>
@@ -29,15 +29,15 @@
 29,0,0,0,0,0,0,0,29,29,29,29,29,29,29,29,29,29,0,0,0,0,0,0,0,29,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
 29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,0,0,0,0,29,0,0,0,29,29,0,0,0,0,0,0,0,0,0,0,
 29,29,29,29,29,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,29,29,29,29,29,29,29,29,29,29,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
-29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
-29,0,0,0,0,0,0,0,0,0,0,0,29,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,29,29,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
-29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
+29,0,0,0,0,0,0,0,0,0,0,0,29,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
+29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,29,29,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
 29,0,0,0,0,0,0,0,29,0,0,0,0,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
-29,0,0,0,0,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,0,0,0,29,29,0,0,0,0,0,0,0,0,0,0,
+29,0,0,0,0,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
+29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,29,29,0,0,0,0,0,0,0,0,0,0,
 29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
 29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
 29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,29,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
-29,29,29,0,0,0,29,29,29,0,0,0,29,29,29,0,0,0,29,29,29,0,0,0,29,29,29,0,0,29,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
+29,29,29,0,0,29,29,29,29,0,0,0,29,29,29,0,0,0,29,29,29,0,0,0,29,29,29,0,0,29,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
 29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
 29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,29,0,0,0,29,29,0,0,0,0,0,0,0,0,0,0,
 29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,0,0,0,0,29,0,0,0,0,29,0,0,0,0,0,0,0,0,0,0,
@@ -80,7 +80,7 @@
   <object id="6" name="TestSlime" type="Slime" x="406.083" y="574.167">
    <point/>
   </object>
-  <object id="7" name="TestSlime" type="Slime" x="213.083" y="797.834">
+  <object id="7" name="TestSlime" type="Slime" x="212.962" y="765.834">
    <point/>
   </object>
   <object id="8" name="TestSlime" type="Slime" x="716.083" y="350.167">
@@ -125,22 +125,139 @@
    </properties>
    <point/>
   </object>
-  <object id="34" name="TestSlime" type="Slime" x="656" y="795.333">
+  <object id="34" name="TestSlime" type="Slime" x="655.879" y="763.333">
    <point/>
   </object>
-  <object id="36" name="TestBat" type="Bat" x="84" y="1727">
+  <object id="36" name="TestBat" type="Bat" x="96" y="1788.33">
    <point/>
   </object>
   <object id="41" name="TestBat" type="Bat" x="335" y="1727">
    <point/>
   </object>
-  <object id="42" name="TestBat" type="Bat" x="529" y="1727">
+  <object id="42" name="TestBat" type="Bat" x="530.333" y="1779">
    <point/>
   </object>
   <object id="43" name="TestBat" type="Bat" x="751" y="1726">
    <point/>
   </object>
-  <object id="44" name="TestBat" type="Bat" x="979" y="1726">
+  <object id="44" name="TestBat" type="Bat" x="977.667" y="1784.67">
+   <point/>
+  </object>
+  <object id="45" name="TestBat" type="Bat" x="1229.33" y="1634.67">
+   <point/>
+  </object>
+  <object id="46" name="TestBat" type="Bat" x="1133.33" y="1154.67">
+   <point/>
+  </object>
+  <object id="47" name="TestBat" type="Bat" x="1230.67" y="676">
+   <point/>
+  </object>
+  <object id="48" name="Lava" type="Lava" x="64.125" y="1023.75">
+   <point/>
+  </object>
+  <object id="50" name="Lava" type="Lava" x="96" y="1024">
+   <point/>
+  </object>
+  <object id="51" name="Lava" type="Lava" x="159.875" y="1023.5">
+   <point/>
+  </object>
+  <object id="52" name="Lava" type="Lava" x="128" y="1023.5">
+   <point/>
+  </object>
+  <object id="53" name="Lava" type="Lava" x="224.125" y="1023.75">
+   <point/>
+  </object>
+  <object id="54" name="Lava" type="Lava" x="192.25" y="1023.75">
+   <point/>
+  </object>
+  <object id="55" name="Lava" type="Lava" x="287.875" y="1024">
+   <point/>
+  </object>
+  <object id="56" name="Lava" type="Lava" x="256" y="1023.75">
+   <point/>
+  </object>
+  <object id="57" name="Lava" type="Lava" x="352.125" y="1024">
+   <point/>
+  </object>
+  <object id="58" name="Lava" type="Lava" x="384.125" y="1023.5">
+   <point/>
+  </object>
+  <object id="59" name="Lava" type="Lava" x="416" y="1023.5">
+   <point/>
+  </object>
+  <object id="60" name="Lava" type="Lava" x="512.125" y="1023.75">
+   <point/>
+  </object>
+  <object id="61" name="Lava" type="Lava" x="544" y="1024">
+   <point/>
+  </object>
+  <object id="62" name="Lava" type="Lava" x="448.375" y="1023.75">
+   <point/>
+  </object>
+  <object id="63" name="Lava" type="Lava" x="480.25" y="1023.75">
+   <point/>
+  </object>
+  <object id="64" name="Lava" type="Lava" x="320.25" y="1023.75">
+   <point/>
+  </object>
+  <object id="65" name="Lava" type="Lava" x="608.057" y="1023.7">
+   <point/>
+  </object>
+  <object id="66" name="Lava" type="Lava" x="640.057" y="1023.2">
+   <point/>
+  </object>
+  <object id="67" name="Lava" type="Lava" x="671.932" y="1023.2">
+   <point/>
+  </object>
+  <object id="68" name="Lava" type="Lava" x="768.057" y="1023.45">
+   <point/>
+  </object>
+  <object id="69" name="Lava" type="Lava" x="799.932" y="1023.7">
+   <point/>
+  </object>
+  <object id="70" name="Lava" type="Lava" x="704.307" y="1023.45">
+   <point/>
+  </object>
+  <object id="71" name="Lava" type="Lava" x="736.182" y="1023.45">
+   <point/>
+  </object>
+  <object id="72" name="Lava" type="Lava" x="576.182" y="1023.45">
+   <point/>
+  </object>
+  <object id="73" name="Lava" type="Lava" x="831.75" y="1023.75">
+   <point/>
+  </object>
+  <object id="74" name="Lava" type="Lava" x="864.5" y="1023.5">
+   <point/>
+  </object>
+  <object id="75" name="Lava" type="Lava" x="896.25" y="1023.75">
+   <point/>
+  </object>
+  <object id="76" name="Lava" type="Lava" x="319.879" y="767.667">
+   <point/>
+  </object>
+  <object id="77" name="Lava" type="Lava" x="351.879" y="767.833">
+   <point/>
+  </object>
+  <object id="78" name="Lava" type="Lava" x="383.712" y="768.083">
+   <point/>
+  </object>
+  <object id="79" name="Lava" type="Lava" x="415.712" y="767.834">
+   <point/>
+  </object>
+  <object id="80" name="Lava" type="Lava" x="447.962" y="768">
+   <point/>
+  </object>
+  <object id="81" name="Lava" type="Lava" x="479.545" y="768">
+   <point/>
+  </object>
+  <object id="82" name="Lava" type="Lava" x="512.212" y="767.667">
+   <point/>
+  </object>
+  <object id="83" name="Lava" type="Lava" x="543.879" y="768">
+   <point/>
+  </object>
+  <object id="84" name="Lava" type="Lava" x="928" y="1024.33">
    <point/>
   </object>
  </objectgroup>

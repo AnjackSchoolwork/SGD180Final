@@ -67,6 +67,14 @@ game_play.prototype = {
 				temp_entity.sprite.animations.add("fly", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true)
 				temp_entity.sprite.animations.play("fly")
 			}
+			else if (object_list[index].type == 'Lava') {
+				var temp_entity = new Entity(this, enemies, object_list[index].x, object_list[index].y, "Lava")
+				temp_entity.sprite.anchor.set(1,1)
+
+				// Load Animations
+				temp_entity.sprite.animations.add("flow", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true)
+				temp_entity.sprite.animations.play("flow")
+			}
 			// And an exit
 			else if (object_list[index].type == 'portal') {
 				this.game.exit_door = this.game.add.sprite(object_list[index].x, object_list[index].y, "Door_Big")
@@ -197,12 +205,7 @@ function promptExit(player, exit) {
 function enemyHitPlayerMelee(p_sprite, enemy) {
 	// TODO: Check enemy for damage type & amount
 	p_sprite.entity.handleDamage(enemy.entity)
-	if (p_sprite.x > enemy.x) {
-		enemy.entity.goLeft()
-	}
-	else {
-		enemy.entity.goRight()
-	}
+	enemy.entity.Bump(p_sprite.entity)
 }
 
 /*

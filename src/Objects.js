@@ -57,6 +57,13 @@ class Entity {
 	}
 
 	/*
+	* Handle knockback from hit
+	*/
+	Bump(source) {
+		
+	}
+
+	/*
 	* Flash the sprite red to show that we took damage.
 	*/
 	displayDamageEffect() {
@@ -138,6 +145,18 @@ class MobileEntity extends Entity {
 
 	goRight() {
 		this.velocity_x = this.base_speed
+	}
+
+	/*
+	* Handle knockback from hit
+	*/
+	Bump(source) {
+		if (source.x > this.x) {
+			this.goLeft()
+		}
+		else {
+			this.goRight()
+		}
 	}
 
 	/*

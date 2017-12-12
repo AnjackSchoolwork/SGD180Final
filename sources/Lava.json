@@ -1,0 +1,110 @@
+{ "frames": [
+   {
+    "filename": "Lava 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 1.ase",
+    "frame": { "x": 32, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 2.ase",
+    "frame": { "x": 64, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 3.ase",
+    "frame": { "x": 96, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 4.ase",
+    "frame": { "x": 128, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 5.ase",
+    "frame": { "x": 160, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 6.ase",
+    "frame": { "x": 192, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 7.ase",
+    "frame": { "x": 224, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 8.ase",
+    "frame": { "x": 256, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   },
+   {
+    "filename": "Lava 9.ase",
+    "frame": { "x": 288, "y": 0, "w": 32, "h": 26 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 26 },
+    "sourceSize": { "w": 32, "h": 26 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.5-x64",
+  "image": "D:\\Projects\\WakeTech\\SGD180\\SGD180Final\\sources\\Lava.png",
+  "format": "RGBA8888",
+  "size": { "w": 320, "h": 26 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Base", "opacity": 255, "blendMode": "normal" },
+   { "name": "Waves 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Waves 2", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
