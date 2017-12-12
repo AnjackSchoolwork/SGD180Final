@@ -25,6 +25,11 @@ game_play.prototype = {
 		this.game.game_over_sound = this.game.add.audio('Game Over')
 		this.game.pickup_sound = this.game.add.audio('Select')
 
+		// Load Music
+		this.game.game_music = this.game.add.audio('Game Music')
+		this.game.game_music.loop = true
+		this.game.game_music.play()
+
 		// Physics
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
 		this.game.physics.arcade.sortDirection = Phaser.Physics.Arcade.SORT_NONE
@@ -249,6 +254,7 @@ function checkInput(game, controls, player) {
 
 	if (controls.use_key.isDown) {
 		if (player.sprite.overlap(game.exit_door)) {
+			game.game_music.stop()
 			game.game_over_sound.play()
 			game.state.start('Game Over', true, false, controls, "You escaped!", game.score)
 		}

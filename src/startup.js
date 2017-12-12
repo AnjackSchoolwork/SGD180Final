@@ -30,6 +30,12 @@ startup.prototype = {
 		this.game.load.audio('Jump', 'audio/Jump.mp3')
 		this.game.load.audio('Hit', 'audio/Hit.mp3')
 		this.game.load.audio('Game Over', 'audio/Game_Over.mp3')
+		this.game.load.audio('Game Music', 'audio/Game_Music.mp3')
+		this.game.load.audio('Menu Music', 'audio/Menu_Music.mp3')
+
+		// Load Music
+		
+		
 
 		// Music and tilesets will be loaded per-level
 

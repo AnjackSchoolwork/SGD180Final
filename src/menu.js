@@ -26,6 +26,9 @@ menu.prototype = {
 	create: function () {
 		// Audio
 		this.menu_sound = this.game.add.audio('Select')
+		this.game.menu_music = this.game.add.audio('Menu Music')
+		this.game.menu_music.loop = true
+		this.game.menu_music.play()
 
 		// Display the title image along with option buttons
 		// TODO: Check to see if menu is loaded during game and adjust content accordingly
@@ -49,6 +52,7 @@ menu.prototype = {
 	// Start the actual gameplay
 	// TODO: Reset player and level data
 	clickButtonPlay: function () {
+		this.game.menu_music.stop()
 		// Play the sound
 		this.menu_sound.play()
 		// Pass the controls object to the next state because I don't like global variables

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<!-- Load framework -->
+    <script type="text/javascript" src="src/phaser.js"></script>
+	<!-- Load Objects -->
+	<script type="text/javascript" src="src/Objects.js"></script>
+	<!-- Load game states -->
+	<script type="text/javascript" src="src/startup.js"></script>
+	<script type="text/javascript" src="src/menu.js"></script>
+	<script type="text/javascript" src="src/game_play.js"></script>
+	<script type="text/javascript" src="src/game_over.js"></script>
+	<!-- Load init script -->
+	<script type="text/javascript" src="src/init.js"></script>
+	<!-- Load stylesheet -->
+	<link rel="stylesheet" type="text/css" href="style.css" />
+    <title></title>
+</head>
+<body>
+	<div id="title">
+		<!-- Single-line title text (subscript supported) -->
+		<br />
+		<img src="img/Logo_Title.png" />
+		<h4>Instructions below</h4>
+	</div>
+	<div id="game_screen">
+		<!-- This is where the visible canvas element should go -->
+	</div>
+	<div id="instructions">
+		<!-- Formatted, simple instructions go here -->
+		<p>
+			You control Bob the block:<br /><img src="img/Placeholder_Player.png" /><br />Bob is a simple block who just happens to possess the amazing ability to shoot balls of plasma out of his face.<br />
+			Somehow, Bob has gotten himself trapped in this strange dungeon. The only way out is through a locked door.<br />
+			Please help Bob find the key at the bottom of the dungeon and then climb back up to escape through the door.<br />
+			<br />Controls:<br />
+			<br />
+			A			-	Move Bob to the left<br />
+			D			-	Move Bob to the right<br />
+			Spacebar	-	Make Bob jump<br />
+			<br />
+			Left Mouse	-	Make Bob fire a ball of burning plasma<br />
+		</p>
+	</div>
+	<script>
+		// Load game after previous elements have completed
+		setup()
+	</script>
+</body>
+</html>

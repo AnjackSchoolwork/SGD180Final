@@ -443,6 +443,7 @@ class Player {
 	dieIfDead() {
 		if (this.health <= 0) {
 			this.sprite.kill()
+			this.game.game_music.stop()
 			this.game.state.start('Game Over', true, false, this.context.controls, "You died.", this.game.score)
 		}
 	}
